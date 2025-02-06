@@ -8,19 +8,18 @@ memungkinkan pengguna mengunduh lagu dari Spotify dengan mudah
 <p>-download lagu tanpa batasan</p>
 <p>-high quality audio</p>
 <p>-antarmuka yang ringan</p>
-<p-ui dan ux yang tidak membosankan 
+<p>-ui dan ux yang tidak membosankan </p>
 
 cara penggunaan:
 
--salin link lagu yang ingin anda download 
--lalu tempal setelah itu klik download 
--include nama artis, judul lagu, foto album lagu
-
+<p>-salin link lagu yang ingin anda download</p>
+<p>-lalu tempal setelah itu klik download</p>
+<p>-include nama artis, judul lagu, foto album lagu</p>
 
 kekurangan:
 
--masih hanya mendukung mp3 
--belum bisa download playlist
+<p>-masih hanya mendukung mp3</p>
+<p>-belum bisa download playlist</p>
 
 
 "wajar yang nama nya manusia punya kekurangan,
