@@ -6,9 +6,9 @@ memungkinkan pengguna mengunduh lagu dari Spotify dengan mudah
  fitur:
 
 <p>-download lagu tanpa batasan</p>
--high quality audio
--antarmuka yang ringan
--ui dan ux yang tidak membosankan 
+<p>-high quality audio</p>
+<p>-antarmuka yang ringan</p>
+<p-ui dan ux yang tidak membosankan 
 
 cara penggunaan:
 
