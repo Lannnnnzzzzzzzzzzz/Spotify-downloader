@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Spotify MP3 Downloader">
+  <title>Spotify MP3 Downloader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+Download your favorite Spotify tracks or search tracks in high-quality 320kbps MP3 format.
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: linear-gradient(45deg, #1db954, #191414, #1ed760, #191414);
+      background-size: 200% 200%;
+      animation: gradientShift 6s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background-color: #292b2f;
+      padding: 50px;
+      border-radius: 15px;
+      box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      width: 100%;
+      max-width: 1000px;
+      animation: fadeIn 1.5s ease-in-out;
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #1ed760;
+    }
+
+    h1 span {
+      color: #fff;
+    }
+
+    .logo {
+      width: 90px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.4));
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+
+    form {
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 15px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      background-color: #333;
+      color: #fff;
+      transition: box-shadow 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      box-shadow: 0 0 10px #1ed760;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.2rem;
+      background-color: #1db954;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #159f44;
+    }
+
+    .loading {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #1ed760;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .result {
+      margin-top: 30px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .result h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .result p {
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+
+    .result img {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .download-btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #1db954;
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background-color: #159f44;
+    }
+
+    .download-another {
+      margin-top: 25px;
+      display: none;
+      cursor: pointer;
+      color: #1ed760;
+      font-size: 0.850rem;
+    }
+
+    .error {
+      color: red;
+      font-size: 1.2rem;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    footer a {
+      color: #1db954;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #159f44;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      input[type="text"], button {
+        font-size: 0.950rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify Logo" class="logo">
+    <h1><span>Spotify</span> Download MP3</h1>
+    <p>Unduh lagu Spotify favorit Anda atau cari lagu dalam format MP3 320kbps berkualitas tinggi.</p>
+    <form id="spotifyForm">
+      <input type="text" id="spotifyInput" placeholder="Masukkan URL Lagu Spotify atau permintaan pencarian" required>
+      <button type="submit">Download</button>
+    </form>
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+    </div>
+    <div class="result" id="result"></div>
+    <p class="download-another" id="downloadAnother">Unduh Lagu Lain</p>
+    <footer>
+      <p>&copy; 2024. All rights reserved. | Developed with ❤️ by <a href="https://www.facebook.com/Beatrixxiw" target="_blank">Lann Zephry</a></p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('spotifyForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const input = document.getElementById('spotifyInput').value.trim();
+      const resultDiv = document.getElementById('result');
+      const loadingDiv = document.getElementById('loading');
+      const downloadAnother = document.getElementById('downloadAnother');
+      
+      loadingDiv.style.display = "block";
+      resultDiv.innerHTML = "";
+      downloadAnother.style.display = "none";
+
+
+      const isSpotifyUrl = (input) => /^https:\/\/open\.spotify\.com\/track\//.test(input);
+      if (isSpotifyUrl(input)) {
+        try {
+          const response = await fetch('/track', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url: input })
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            resultDiv.innerHTML = `
+              <h2>${data[0].title}</h2>
+              <p><strong>Artist:</strong> ${data[0].artist}</p>
+              <p><strong>Release Date:</strong> ${data[0].releaseDate}</p>
+              <img src="${data[0].thumbnail}" alt="${data[0].title}">
+              <p><a href="${data[0].audio}" class="download-btn" download>Download MP3</a></p>
+            `;
+            downloadAnother.style.display = "block";
+          } else {
+            resultDiv.innerHTML = `<p class="error">Tidak ditemukan!</p>`;
+          }
+        } catch (error) {
+          resultDiv.innerHTML = `<p class="error">Error, coba lagi nanti.</p>`;
+        } finally {
+          loadingDiv.style.display = "none";
+        }
+      } else {
+        try {
+          const response = await fetch('/search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: input })
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            resultDiv.innerHTML = data.map((track, index) => `
+              <div class="track">
+                <h2>${track.title}</h2>
+                <p><strong>Artist:</strong> ${track.artist}</p>
+                <p><strong>Release Date:</strong> ${track.releaseDate}</p>
+                <img src="${track.thumbnail}" alt="${track.title}">
+                <p><a href="${track.audio}" class="download-btn" download>Download MP3</a></p>
+              </div>
+            `).join('');
+            downloadAnother.style.display = "block";
+          } else {
+            resultDiv.innerHTML = `<p class="error">Tidak ditemukan!</p>`;
+          }
+        } catch (error) {
+          resultDiv.innerHTML = `<p class="error">Error, coba lagi nanti</p>`;
+        } finally {
+          loadingDiv.style.display = "none";
+        }
+      }
+    });
+
+    document.getElementById('downloadAnother').addEventListener('click', function () {
+      document.getElementById('spotifyInput').value = '';
+      document.getElementById('result').innerHTML = '';
+      this.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
